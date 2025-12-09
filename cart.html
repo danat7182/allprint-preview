@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Корзина — AllPrint.kz</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        /* ===== КОРЗИНА — ПРЕМИУМ ДИЗАЙН ===== */
+
+        .cart-empty {
+            padding: 40px 0;
+            font-size: 18px;
+            color: #6b7280;
+        }
+
+        .cart-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 18px;
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            align-items: center;
+            transition: .2s;
+        }
+
+        .cart-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+        }
+
+        .cart-item img {
+            width: 110px;
+            height: 110px;
+            border-radius: 14px;
+            object-fit: cover;
+        }
+
+        .cart-item h3 {
+            margin: 0 0 6px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .cart-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .cart-summary {
+            margin-top: 32px;
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+        }
+
+        .cart-summary p {
+            margin: 6px 0;
+            font-size: 16px;
+            color: #374151;
+        }
+
+        .cart-summary strong {
+            color: #111827;
+        }
+
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            border: 1px solid #d1d5db;
+            background: #fff;
+        }
+
+        @media (max-width: 600px) {
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cart-item img {
+                width: 100%;
+                height: 180px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="container header">
+        <a href="index.html" class="brand">
+            <img src="assets/img/logo.png" alt="AllPrint логотип" class="logo" />
+            <span class="brand-text">allprint.kz</span>
+        </a>
+
+        <nav class="nav">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="delivery.html">Доставка</a>
+            <a href="about.html">О нас</a>
+            <a href="account.html">Личный кабинет</a>
+        </nav>
+
+        <div class="actions">
+            <button type="button" class="btn" id="openLoginBtn">Войти</button>
+            <button type="button" class="btn btn-green" id="openRegisterBtn">Регистрация −20%</button>
+            <a href="cart.html" class="btn btn-outline">Корзина (<span id="cartCount">0</span>)</a>
+        </div>
+
+        <button class="burger" id="burger" aria-label="menu">☰</button>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main class="container">
+
+        <h1>Корзина</h1>
+
+        <div id="cartContainer"></div>
+
+        <div id="cartSummary" class="cart-summary" style="display:none;">
+            <p>Сумма товаров: <strong><span id="cartTotal">0</span> ₸</strong></p>
+            <p>Скидка (если зарегистрированы): <strong><span id="cartDiscount">0</span> ₸</strong></p>
+            <p style="font-size:20px;margin-top:10px;">
+                <strong>Итого к оплате: <span id="cartFinal">0</span> ₸</strong>
+            </p>
+
+            <div class="cart-actions">
+                <button class="btn btn-outline" id="clearCart">Очистить корзину</button>
+                <a href="checkout.html" class="btn btn-green">Оформить заказ</a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>© AllPrint.kz, 2025</p>
+        </div>
+    </footer>
+
+    <!-- ===== AUTH MODAL (как на других страницах с табами) ===== -->
+    <div class="modal" id="authModal" aria-hidden="true">
+        <div class="modal-backdrop" id="authBackdrop"></div>
+        <div class="modal-card">
+            <button class="modal-close" id="authClose">✕</button>
+
+            <div class="tabs">
+                <div id="tabLogin" class="tab active">Вход</div>
+                <div id="tabRegister" class="tab">Регистрация</div>
+            </div>
+
+            <div id="loginForm" class="tab-content active">
+                <form>
+                    <div class="field">
+                        <label>Email или телефон</label>
+                        <input type="text" id="loginEmail" required>
+                    </div>
+                    <div class="field">
+                        <label>Пароль</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <div class="actions-row">
+                        <button type="submit" class="btn btn-green">Войти</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="registerForm" class="tab-content">
+                <form>
+                    <div class="field">
+                        <label>Email или телефон</label>
+                        <input type="text" id="regEmail" required>
+                    </div>
+                    <div class="field">
+                        <label>Пароль</label>
+                        <input type="password" id="regPassword" required>
+                    </div>
+                    <div class="actions-row">
+                        <button type="submit" class="btn btn-green">Создать аккаунт</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== JS ===== -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- ЛОГИКА КОРЗИНЫ (ТВОЯ СТАРАЯ, НЕ ТРОГАЮ) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const cartContainer = document.getElementById('cartContainer');
+            const cartSummary = document.getElementById('cartSummary');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartDiscount = document.getElementById('cartDiscount');
+            const cartFinal = document.getElementById('cartFinal');
+            const clearCart = document.getElementById('clearCart');
+
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+            function renderCart() {
+                if (cart.length === 0) {
+                    cartContainer.innerHTML = '<p class="cart-empty">Ваша корзина пуста.</p>';
+                    cartSummary.style.display = 'none';
+                    return;
+                }
+
+                cartContainer.innerHTML = `
+                    <div class="cart-grid">
+                        ${cart.map((p, i) => `
+                            <div class="cart-item">
+                                <img src="assets/img/${p.img}" alt="${p.name}">
+                                <div>
+                                    <h3>${p.name}</h3>
+                                    <div class="cart-price">${p.price.toLocaleString()} ₸</div>
+                                    <button class="btn btn-outline" onclick="removeItem(${i})">Удалить</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                updateSummary();
+            }
+
+            window.removeItem = function (index) {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+            };
+
+            function updateSummary() {
+                const subtotal = cart.reduce((sum, p) => sum + p.price, 0);
+                const hasDiscount = localStorage.getItem('ap_discount20') === 'true';
+                const discount = hasDiscount ? Math.round(subtotal * 0.2) : 0;
+                const total = subtotal - discount;
+
+                cartSummary.style.display = 'block';
+                cartTotal.textContent = subtotal.toLocaleString();
+                cartDiscount.textContent = discount.toLocaleString();
+                cartFinal.textContent = total.toLocaleString();
+            }
+
+            clearCart?.addEventListener('click', () => {
+                if (confirm('Очистить корзину?')) {
+                    cart = [];
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
+                }
+            });
+
+            renderCart();
+        });
+    </script>
+
+    <!-- ЛОГИКА МОДАЛКИ (как в "О НАС") -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const modal = document.getElementById("authModal");
+            const loginTab = document.getElementById("tabLogin");
+            const registerTab = document.getElementById("tabRegister");
+            const loginForm = document.getElementById("loginForm");
+            const registerForm = document.getElementById("registerForm");
+
+            const openLogin = document.getElementById("openLoginBtn");
+            const openRegister = document.getElementById("openRegisterBtn");
+            const closeModal = document.getElementById("authClose");
+
+            function openAuth() {
+                modal.classList.add("show");
+            }
+
+            function closeAuth() {
+                modal.classList.remove("show");
+            }
+
+            // Открыть вход
+            openLogin.addEventListener("click", (e) => {
+                e.preventDefault();
+                loginTab.classList.add("active");
+                registerTab.classList.remove("active");
+                loginForm.classList.add("active");
+                registerForm.classList.remove("active");
+                openAuth();
+            });
+
+            // Открыть регистрацию
+            openRegister.addEventListener("click", (e) => {
+                e.preventDefault();
+                loginTab.classList.remove("active");
+                registerTab.classList.add("active");
+                loginForm.classList.remove("active");
+                registerForm.classList.add("active");
+                openAuth();
+            });
+
+            // Закрыть
+            closeModal.addEventListener("click", closeAuth);
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) closeAuth();
+            });
+        });
+    </script>
+
+</body>
+
+</html>

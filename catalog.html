@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Каталог — AllPrint.kz</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        /* ======== КАТАЛОГ — ПРЕМИУМ СТИЛЬ ======== */
+
+        h1 {
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .filters {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+            background: #fff;
+            padding: 16px;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        }
+
+        .filters select {
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid #d1d5db;
+            background: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .filters select:focus {
+            border-color: #22c55e;
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, .25);
+            outline: none;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 22px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07);
+            transition: .25s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+
+        .product-body {
+            padding: 14px 16px;
+        }
+
+        .product-body h3 {
+            font-size: 17px;
+            margin: 0 0 6px;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .btn-add {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            background: #22c55e;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .btn-add:hover {
+            background: #16a34a;
+        }
+
+        @media (max-width: 640px) {
+            .product-card img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="container header">
+        <a href="/index.html" class="brand">
+            <img src="assets/img/logo.png" alt="AllPrint логотип" class="logo" />
+            <span class="brand-text">allprint.kz</span>
+        </a>
+
+        <nav class="nav">
+            <a href="/index.html">Главная</a>
+            <a href="/catalog.html" class="active">Каталог</a>
+            <a href="/delivery.html">Доставка</a>
+            <a href="/about.html">О нас</a>
+            <a href="/account.html">Личный кабинет</a>
+        </nav>
+
+        <div class="actions">
+            <button type="button" class="btn" id="openLoginBtn">Войти</button>
+            <button type="button" class="btn btn-green" id="openRegisterBtn">Регистрация −20%</button>
+            <a href="/cart.html" class="btn btn-outline">Корзина (<span id="cartCount">0</span>)</a>
+        </div>
+
+        <button class="burger" id="burger" aria-label="menu">☰</button>
+    </header>
+
+    <!-- ===== MOBILE NAV ===== -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="/index.html">Главная</a>
+        <a href="/catalog.html" class="active">Каталог</a>
+        <a href="/delivery.html">Доставка</a>
+        <a href="/about.html">О нас</a>
+        <a href="/account.html">Личный кабинет</a>
+        <a href="/cart.html" class="btn btn-green">Корзина</a>
+    </nav>
+
+    <!-- ===== CATALOG ===== -->
+    <main class="container">
+
+        <h1>Каталог принтованной одежды</h1>
+
+        <div class="filters">
+            <select id="filterCategory">
+                <option value="all">Все категории</option>
+                <option value="family">Семейные</option>
+                <option value="funny">Прикольные</option>
+                <option value="holiday">Праздничные</option>
+            </select>
+
+            <select id="filterSize">
+                <option value="all">Все размеры</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+            </select>
+
+            <select id="sortOrder">
+                <option value="default">По умолчанию</option>
+                <option value="priceAsc">Сначала дешевые</option>
+                <option value="priceDesc">Сначала дорогие</option>
+            </select>
+        </div>
+
+        <div id="productList" class="catalog-grid"></div>
+
+    </main>
+
+    <!-- ===== MODAL AUTH ===== -->
+    <div class="modal" id="authModal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" id="authBackdrop"></div>
+
+        <div class="modal-card">
+            <button class="modal-close" id="authClose">✕</button>
+
+            <div class="tabs">
+                <button id="tabLogin" class="tab active">Войти</button>
+                <button id="tabRegister" class="tab">Регистрация (−20%)</button>
+            </div>
+
+            <form id="loginForm" class="tab-content active">
+                <div class="field">
+                    <label for="loginEmail">Email или телефон</label>
+                    <input type="text" id="loginEmail">
+                </div>
+
+                <div class="field">
+                    <label for="loginPassword">Пароль</label>
+                    <input type="password" id="loginPassword">
+                </div>
+
+                <div class="actions-row">
+                    <button type="submit" class="btn btn-green">Войти</button>
+                </div>
+            </form>
+
+            <form id="registerForm" class="tab-content">
+                <div class="field">
+                    <label for="regEmail">Email или телефон</label>
+                    <input type="text" id="regEmail">
+                </div>
+
+                <div class="field">
+                    <label for="regPassword">Пароль</label>
+                    <input type="password" id="regPassword">
+                </div>
+
+                <div class="actions-row">
+                    <button type="submit" class="btn btn-green">Зарегистрироваться и получить −20%</button>
+                </div>
+
+                <p class="tiny muted">Можно оформить заказ и без регистрации.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>© AllPrint.kz, 2025</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

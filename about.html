@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>О нас — AllPrint.kz</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        /* Единый стиль карточек, как на delivery.html */
+        .about-card {
+            background: #ffffff;
+            padding: 28px 32px;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
+            margin-bottom: 35px;
+        }
+
+        .about-card h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #1f2937;
+        }
+
+        .about-card p,
+        .about-card li {
+            font-size: 17px;
+            line-height: 1.55;
+            color: #374151;
+        }
+
+        .about-card ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .icon {
+            width: 26px;
+            height: 26px;
+            stroke: #1f2937;
+            stroke-width: 1.6;
+            fill: none;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="container header">
+        <a href="index.html" class="brand">
+            <img src="assets/img/logo.png" alt="AllPrint логотип" class="logo" />
+            <span class="brand-text">allprint.kz</span>
+        </a>
+
+        <nav class="nav">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="delivery.html">Доставка</a>
+            <a href="about.html" class="active">О нас</a>
+            <a href="account.html">Личный кабинет</a>
+        </nav>
+
+        <div class="actions">
+            <a href="#" id="openLoginBtn" class="btn">Войти</a>
+            <a href="#" id="openRegisterBtn" class="btn btn-green">Регистрация −20%</a>
+            <a href="cart.html" class="btn">🛒 <span id="cartCount">0</span></a>
+        </div>
+
+        <button class="burger" id="burger" aria-label="menu">☰</button>
+    </header>
+
+    <!-- ===== MOBILE NAV ===== -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="delivery.html">Доставка</a>
+        <a href="about.html" class="active">О нас</a>
+        <a href="account.html">Личный кабинет</a>
+        <a href="#" id="openLoginBtnMobile">Войти</a>
+        <a href="#" id="openRegisterBtnMobile" class="btn btn-green">Регистрация</a>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="container" style="margin-top: 40px; max-width: 900px;">
+
+        <h1 style="margin-bottom: 10px;">О компании AllPrint.kz</h1>
+        <p class="muted" style="font-size: 16px;">
+            Бренд, который делает индивидуальность доступной каждому.
+        </p>
+
+
+        <!-- ===== ИСТОРИЯ ===== -->
+        <section class="about-card">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                    <path d="M8 2v4M16 2v4M4 10h16" />
+                </svg>
+                Наша история
+            </h2>
+
+            <p>
+                <b>AllPrint.kz</b> — казахстанский бренд, основанный в <b>2012 году</b> в Павлодаре.
+                Мы начинали как небольшая мастерская по печати логотипов и надписей на футболках.
+                За более чем 10 лет компания выросла в полноценный онлайн-сервис индивидуальной одежды.
+            </p>
+
+            <p>
+                Сегодня <b>AllPrint.kz</b> — это команда дизайнеров, технологов и специалистов по печати.
+                Мы обслуживаем клиентов по всему Казахстану — от частных заказов до корпоративных коллекций.
+            </p>
+        </section>
+
+
+        <!-- ===== ЦЕННОСТИ ===== -->
+        <section class="about-card">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M9 12l2 2 4-4" />
+                </svg>
+                Наши ценности
+            </h2>
+
+            <ul>
+                <li><b>Качество</b> — стойкие краски и проверенные материалы.</li>
+                <li><b>Скорость</b> — печать и отправка в течение 1–3 дней.</li>
+                <li><b>Индивидуальность</b> — создаём дизайн под клиента.</li>
+                <li><b>Доверие</b> — за 12 лет нас выбрали тысячи клиентов.</li>
+            </ul>
+        </section>
+
+
+        <!-- ===== ТЕХНОЛОГИИ ===== -->
+        <section class="about-card">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="14" rx="2" />
+                    <path d="M8 2v4M16 2v4M3 10h18" />
+                </svg>
+                Наши технологии
+            </h2>
+
+            <p>Мы используем современные методы нанесения изображений:</p>
+
+            <ul>
+                <li>DTF и сублимационная печать — яркие и долговечные принты.</li>
+                <li>Термоплёнки и флекс — стильные надписи и логотипы.</li>
+                <li>Печать на одежде, кружках, худи, толстовках, сумках и аксессуарах.</li>
+            </ul>
+        </section>
+
+
+        <!-- ===== ГЕОГРАФИЯ ===== -->
+        <section class="about-card">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M12 2C8 2 5 5.1 5 9c0 5.3 7 13 7 13s7-7.7 7-13c0-3.9-3-7-7-7z" />
+                    <circle cx="12" cy="9" r="3" />
+                </svg>
+                Где мы находимся
+            </h2>
+
+            <p>Наш офис и мастерская расположены в городе <b>Павлодар</b>.</p>
+            <p>Мы доставляем заказы по всему Казахстану и предлагаем самовывоз.</p>
+
+            <p>
+                Свяжитесь с нами:<br>
+                <b>+7 (700) 000-00-00</b><br>
+                или напишите в <a href="https://wa.me/77000000000" target="_blank">WhatsApp</a>.
+            </p>
+        </section>
+
+
+        <div class="center" style="margin-top: 50px;">
+            <a href="catalog.html" class="btn btn-green" style="font-size: 15px;">Перейти в каталог</a>
+        </div>
+
+    </main>
+
+    <!-- ===== AUTH MODAL ===== -->
+    <div class="modal" id="authModal" aria-hidden="true">
+        <div class="modal-backdrop" id="authBackdrop"></div>
+        <div class="modal-card">
+            <button class="modal-close" id="authClose">✕</button>
+
+            <div class="tabs">
+                <div id="tabLogin" class="tab active">Войти</div>
+                <div id="tabRegister" class="tab">Регистрация</div>
+            </div>
+
+            <div id="loginForm" class="tab-content active">
+                <form>
+                    <div class="field">
+                        <label>Email или телефон</label>
+                        <input type="text" id="loginEmail" required>
+                    </div>
+                    <div class="field">
+                        <label>Пароль</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <div class="actions-row">
+                        <button type="submit" class="btn btn-green">Войти</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="registerForm" class="tab-content">
+                <form>
+                    <div class="field">
+                        <label>Email или телефон</label>
+                        <input type="text" id="regEmail" required>
+                    </div>
+                    <div class="field">
+                        <label>Пароль</label>
+                        <input type="password" id="regPassword" required>
+                    </div>
+                    <div class="actions-row">
+                        <button type="submit" class="btn btn-green">Создать аккаунт</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>© AllPrint.kz, 2025</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+
+</body>
+
+</html>

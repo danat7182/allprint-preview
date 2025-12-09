@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Доставка и оплата — AllPrint.kz</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        /* ===== PREMIUM DELIVERY PAGE DESIGN ===== */
+
+        .info-card {
+            background: #ffffff;
+            padding: 26px 28px;
+            border-radius: 18px;
+            box-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
+            margin-top: 28px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .section-header img {
+            width: 32px;
+            height: 32px;
+            opacity: 0.85;
+        }
+
+        .info-card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .info-card p {
+            margin-bottom: 10px;
+            color: #374151;
+            line-height: 1.55;
+        }
+
+        .styled-list {
+            margin: 12px 0 14px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .styled-list li {
+            margin-bottom: 8px;
+            padding-left: 28px;
+            position: relative;
+            line-height: 1.45;
+        }
+
+        .styled-list li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #22c55e;
+            font-weight: 700;
+        }
+
+        .center-btn {
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="container header">
+        <a href="index.html" class="brand">
+            <img src="assets/img/logo.png" alt="AllPrint логотип" class="logo" />
+            <span class="brand-text">allprint.kz</span>
+        </a>
+
+        <nav class="nav">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="delivery.html" class="active">Доставка</a>
+            <a href="about.html">О нас</a>
+            <a href="account.html">Личный кабинет</a>
+        </nav>
+
+        <div class="actions">
+            <button id="openLoginBtn" class="btn">Войти</button>
+            <button id="openRegisterBtn" class="btn btn-green">Регистрация −20%</button>
+            <a href="cart.html" class="btn btn-outline">Корзина (<span id="cartCount">0</span>)</a>
+        </div>
+
+        <button class="burger" id="burger" aria-label="menu">☰</button>
+    </header>
+
+    <!-- ===== MOBILE NAV ===== -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="delivery.html" class="active">Доставка</a>
+        <a href="about.html">О нас</a>
+        <a href="account.html">Личный кабинет</a>
+        <a href="#" id="openLoginBtnMobile">Войти</a>
+        <a href="#" id="openRegisterBtnMobile" class="btn btn-green">Регистрация</a>
+    </nav>
+
+    <!-- ===== MAIN ===== -->
+    <main class="container" style="margin-top: 30px; max-width: 900px;">
+
+        <h1>Доставка и оплата</h1>
+        <p class="muted" style="margin-bottom: 20px;">
+            Удобные способы доставки, безопасная оплата и прозрачные условия возврата.
+        </p>
+
+        <!-- ===== Delivery ===== -->
+        <section class="info-card">
+            <div class="section-header">
+                <img src="assets/icons/delivery2.svg" alt="">
+                <h2>Доставка по Казахстану</h2>
+            </div>
+
+            <p>Мы доставляем заказы по всему Казахстану. Вы можете выбрать удобный способ:</p>
+
+            <ul class="styled-list">
+                <li>Курьерская доставка — 1–3 дня в Павлодаре и 3–7 дней по Казахстану;</li>
+                <li>Самовывоз — бесплатно из нашего офиса в Павлодаре;</li>
+                <li>Доставка KAZPOST, CDEK или другой транспортной компанией.</li>
+            </ul>
+
+            <p>После оформления заказа вы получите уведомление в WhatsApp или SMS с подтверждением.</p>
+        </section>
+
+        <!-- ===== Payment ===== -->
+        <section class="info-card">
+            <div class="section-header">
+                <img src="assets/icons/payment2.svg" alt="">
+                <h2>Способы оплаты</h2>
+            </div>
+
+            <p>Все способы оплаты полностью безопасны и удобны:</p>
+
+            <ul class="styled-list">
+                <li>Наличными при получении;</li>
+                <li>Перевод на Kaspi Gold или Kaspi QR;</li>
+                <li>Онлайн-оплата банковской картой (Visa, MasterCard);</li>
+                <li>Оплата по счёту — для корпоративных клиентов.</li>
+            </ul>
+
+            <p>После оплаты вы получите электронный чек и подтверждение заказа.</p>
+        </section>
+
+        <!-- ===== Returns ===== -->
+        <section class="info-card">
+            <div class="section-header">
+                <img src="assets/icons/return.svg" alt="">
+                <h2>Возврат и обмен</h2>
+            </div>
+
+            <p>Вы можете вернуть товар в течение <b>14 дней</b>, если соблюдены условия:</p>
+
+            <ul class="styled-list">
+                <li>Товар не был в использовании и сохранил товарный вид;</li>
+                <li>Есть чек или подтверждение покупки;</li>
+                <li>Индивидуальная печать не подлежит возврату (если дефект не со стороны клиента).</li>
+            </ul>
+
+            <p>Для оформления возврата напишите нам:</p>
+            <p>
+                <a href="https://wa.me/77000000000" target="_blank">WhatsApp</a><br>
+                <a href="mailto:support@allprint.kz">support@allprint.kz</a>
+            </p>
+        </section>
+
+        <div class="center-btn">
+            <a href="catalog.html" class="btn btn-green">Перейти в каталог</a>
+        </div>
+
+    </main>
+
+    <!-- ===== AUTH MODAL ===== -->
+    <div class="modal" id="authModal" aria-hidden="true">
+        <div class="modal-backdrop" id="authBackdrop"></div>
+        <div class="modal-card">
+            <button class="modal-close" id="authClose">✕</button>
+
+            <div class="tabs">
+                <div id="tabLogin" class="tab active">Войти</div>
+                <div id="tabRegister" class="tab">Регистрация</div>
+            </div>
+
+            <div id="loginForm" class="tab-content active">
+                <div class="field">
+                    <label>Email или телефон</label>
+                    <input type="text" id="loginEmail" required>
+                </div>
+                <div class="field">
+                    <label>Пароль</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button class="btn btn-green">Войти</button>
+            </div>
+
+            <div id="registerForm" class="tab-content">
+                <div class="field">
+                    <label>Email или телефон</label>
+                    <input type="text" id="regEmail" required>
+                </div>
+                <div class="field">
+                    <label>Пароль</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <button class="btn btn-green">Создать аккаунт</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>© AllPrint.kz, 2025</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof updateCartCount === "function") {
+                updateCartCount();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AllPrint.kz — Магазин принтованной одежды</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    /* ===== HERO BLOCK ===== */
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 0;
+      gap: 40px;
+    }
+
+    .hero-text {
+      max-width: 520px;
+    }
+
+    .hero-text h1 {
+      font-size: 42px;
+      line-height: 1.15;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      color: #4b5563;
+      margin-bottom: 24px;
+    }
+
+    .hero img {
+      width: 480px;
+      border-radius: 22px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+      object-fit: cover;
+    }
+
+    /* ===== CATEGORIES ===== */
+
+    .categories {
+      margin-top: 60px;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .cat-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      transition: .25s;
+      text-align: center;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+    }
+
+    .cat-card img {
+      width: 100%;
+      height: 240px;
+      border-radius: 16px;
+      object-fit: cover;
+      margin-bottom: 14px;
+    }
+
+    /* ===== NEW PRINTS ===== */
+
+    .prints {
+      margin-top: 70px;
+    }
+
+    .prints-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      margin-top: 20px;
+    }
+
+    .print-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+      transition: .25s;
+      text-align: center;
+    }
+
+    .print-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .print-card img {
+      width: 100%;
+      height: 220px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .print-card h4 {
+      margin: 10px 0 4px;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .print-card p {
+      color: #22c55e;
+      font-weight: 700;
+    }
+
+    /* ===== ADVANTAGES (UPDATED, MONOCHROME) ===== */
+
+    .advantages {
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .adv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 26px;
+      margin-top: 24px;
+    }
+
+    .adv-card {
+      background: #fff;
+      padding: 26px 22px;
+      border-radius: 18px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      text-align: center;
+      transition: .25s;
+    }
+
+    .adv-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    .adv-icon {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 14px;
+      opacity: 0.9;
+      filter: grayscale(100%);
+    }
+
+    /* ===== CTA BLOCK ===== */
+
+    .cta {
+      margin-top: 80px;
+      background: #f9fafb;
+      padding: 60px 20px;
+      text-align: center;
+      border-radius: 20px;
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      margin-bottom: 14px;
+      font-weight: 800;
+    }
+
+    .cta p {
+      font-size: 17px;
+      color: #4b5563;
+      margin-bottom: 26px;
+    }
+
+    /* ===== MODAL FIX ===== */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999 !important;
+    }
+
+    .modal.show {
+      display: flex !important;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 420px;
+      padding: 24px;
+      border-radius: 20px;
+      background: #ffffff;
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      border: none;
+      background: #f3f4f6;
+      color: #111;
+      border-radius: 999px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    @media(max-width: 700px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero img {
+        width: 100%;
+      }
+
+      .hero-text h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="container header">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="AllPrint" class="logo" />
+      <span class="brand-text">allprint.kz</span>
+    </a>
+
+    <nav class="nav">
+      <a href="index.html" class="active">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="delivery.html">Доставка</a>
+      <a href="about.html">О нас</a>
+      <a href="account.html">Личный кабинет</a>
+    </nav>
+
+    <div class="actions">
+      <button id="openLoginBtn" class="btn">Войти</button>
+      <button id="openRegisterBtn" class="btn btn-green">Регистрация −20%</button>
+      <a href="cart.html" class="btn btn-outline">Корзина (<span id="cartCount">0</span>)</a>
+    </div>
+
+    <button class="burger" id="burger">☰</button>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html" class="active">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="delivery.html">Доставка</a>
+    <a href="about.html">О нас</a>
+    <a href="account.html">Личный кабинет</a>
+    <a href="cart.html" class="btn btn-green">Корзина</a>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="container hero">
+    <div class="hero-text">
+      <h1>Принтованная одежда<br>для всей семьи</h1>
+      <p>Стильные худи, футболки и свитшоты с уникальными принтами. Доставка по всему Казахстану.</p>
+      <a href="catalog.html" class="btn btn-green">Перейти в каталог</a>
+    </div>
+
+    <img src="assets/img/hero-main.jpg" alt="AllPrint Clothing" />
+  </section>
+
+  <!-- ============ POPULAR CATEGORIES ============ -->
+  <section class="container categories">
+    <h2>Популярные категории</h2>
+
+    <div class="categories-grid">
+      <a href="catalog.html" class="cat-card">
+        <img src="assets/img/cat-family.jpg" alt="">
+        <h3>Семейные</h3>
+      </a>
+
+      <a href="catalog.html" class="cat-card">
+        <img src="assets/img/cat-funny.jpg" alt="">
+        <h3>Прикольные</h3>
+      </a>
+
+      <a href="catalog.html" class="cat-card">
+        <img src="assets/img/cat-holiday.jpg" alt="">
+        <h3>Новинки</h3>
+      </a>
+
+      <a href="catalog.html" class="cat-card">
+        <img src="assets/img/cat-smart.jpg" alt="">
+        <h3>Смарт-принты</h3>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ NEW PRINTS ============ -->
+  <section class="container prints">
+    <h2>Новые принты</h2>
+
+    <div class="prints-grid">
+      <div class="print-card">
+        <img src="assets/img/new1.jpg" alt="">
+        <h4>Семейные майки</h4>
+        <p>49 900 ₸</p>
+      </div>
+
+      <div class="print-card">
+        <img src="assets/img/new2.jpg" alt="">
+        <h4>Гонная ранiя</h4>
+        <p>1 990 ₸</p>
+      </div>
+
+      <div class="print-card">
+        <img src="assets/img/new3.jpg" alt="">
+        <h4>Гамкер</h4>
+        <p>23 990 ₸</p>
+      </div>
+
+      <div class="print-card">
+        <img src="assets/img/new4.jpg" alt="">
+        <h4>Just be cool</h4>
+        <p>13 990 ₸</p>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 18px;">
+      <a href="catalog.html" class="btn btn-green">Все новинки</a>
+    </div>
+  </section>
+
+  <!-- ============ ADVANTAGES (UPDATED) ============ -->
+  <section class="container advantages">
+    <h2>Почему выбирают нас</h2>
+
+    <div class="adv-grid">
+
+      <div class="adv-card">
+        <img src="assets/icons/design.svg" class="adv-icon" alt="">
+        <h4>Уникальные принты</h4>
+        <p>Каждый дизайн создан вручную.</p>
+      </div>
+
+      <div class="adv-card">
+        <img src="assets/icons/quality.svg" class="adv-icon" alt="">
+        <h4>Высокое качество</h4>
+        <p>Премиальный хлопок и долгий срок носки.</p>
+      </div>
+
+      <div class="adv-card">
+        <img src="assets/icons/delivery.svg" class="adv-icon" alt="">
+        <h4>Быстрая доставка</h4>
+        <p>По всему Казахстану за 2–5 дней.</p>
+      </div>
+
+      <div class="adv-card">
+        <img src="assets/icons/payment.svg" class="adv-icon" alt="">
+        <h4>Удобная оплата</h4>
+        <p>Kaspi QR, карта, наличными — как удобно.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="container cta">
+    <h2>Готовы выбрать свой стиль?</h2>
+    <p>Найдите идеальную принтованную одежду для себя и своих близких.</p>
+    <a href="catalog.html" class="btn btn-green">Смотреть каталог</a>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <p>© AllPrint.kz, 2025</p>
+    </div>
+  </footer>
+
+  <!-- ============ AUTH MODAL ============ -->
+  <div class="modal" id="authModal" aria-hidden="true">
+    <div class="modal-backdrop" id="authBackdrop"></div>
+
+    <div class="modal-card">
+      <button class="modal-close" id="authClose">✕</button>
+
+      <div class="tabs">
+        <button id="tabLogin" class="tab active">Войти</button>
+        <button id="tabRegister" class="tab">Регистрация</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginForm" class="tab-content active">
+        <form>
+          <div class="field">
+            <label>Email или телефон</label>
+            <input type="text" id="loginEmail" required>
+          </div>
+          <div class="field">
+            <label>Пароль</label>
+            <input type="password" id="loginPassword" required>
+          </div>
+          <div class="actions-row">
+            <button type="submit" class="btn btn-green">Войти</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="registerForm" class="tab-content">
+        <form>
+          <div class="field">
+            <label>Email или телефон</label>
+            <input type="text" id="regEmail" required>
+          </div>
+          <div class="field">
+            <label>Пароль</label>
+            <input type="password" id="regPassword" required>
+          </div>
+          <div class="actions-row">
+            <button type="submit" class="btn btn-green">Создать аккаунт</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+
+</html>
