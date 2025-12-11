@@ -121,14 +121,40 @@ function updateCartCount() {
 }
 updateCartCount();
 
-// ===================== ТОВАРЫ (LocalStorage + Base64) =====================
+// ===================== ТОВАРЫ =====================
 
-// Дефолтные товары (если localStorage пуст)
+// 🔥 ДЕФОЛТНЫЕ ТОВАРЫ + 3 новых добавлены
 const DEFAULT_PRODUCTS = [
     { id: 1, name: 'Семейные улыбки', category: 'family', size: 'm', price: 4990, image: 'assets/img/p1.jpg' },
     { id: 2, name: 'Горная ромашка', category: 'holiday', size: 's', price: 1990, image: 'assets/img/p2.jpg' },
     { id: 3, name: 'Геймер', category: 'funny', size: 'l', price: 2399, image: 'assets/img/p3.jpg' },
     { id: 4, name: 'Just be cool', category: 'funny', size: 'xl', price: 1399, image: 'assets/img/p4.jpg' },
+
+    // 🔥 ТРИ НОВЫХ ТОВАРА
+    {
+        id: 101,
+        name: "Футболка с принтом (tshort1)",
+        category: "family",
+        size: "m",
+        price: 1999,
+        image: "assets/img/products/tshort1.jpg"
+    },
+    {
+        id: 102,
+        name: "Футболка праздничная (tshort2)",
+        category: "holiday",
+        size: "m",
+        price: 1999,
+        image: "assets/img/products/tshort2.jpg"
+    },
+    {
+        id: 103,
+        name: "Футболка — Ваш принт (tshort3)",
+        category: "funny",
+        size: "m",
+        price: 1999,
+        image: "assets/img/products/tshort3.jpg"
+    }
 ];
 
 function getProducts() {
@@ -199,7 +225,6 @@ filterCategory?.addEventListener('change', applyFilters);
 filterSize?.addEventListener('change', applyFilters);
 sortOrder?.addEventListener('change', applyFilters);
 
-// Рендер при загрузке
 if (productList) renderProducts(getProducts());
 
 // ===================== Добавление в корзину =====================
@@ -233,7 +258,6 @@ function completeOrder(total, name, contact, items) {
 
     localStorage.setItem('orders', JSON.stringify(orders));
 
-    // Бонусы
     const bonuses = JSON.parse(localStorage.getItem('bonuses') || '{"balance":0,"history":[]}');
     const amount = Math.round(total * 0.05);
 
@@ -276,7 +300,6 @@ handleReferral();
 
 let currentImageBase64 = null;
 
-// Преобразование файла в Base64
 document.getElementById('p_image')?.addEventListener('change', e => {
     const file = e.target.files[0];
     if (!file) {
@@ -305,7 +328,6 @@ document.getElementById('btnSaveProduct')?.addEventListener('click', () => {
     let list = getProducts();
 
     if (id) {
-        // Редактирование
         const idx = list.findIndex(p => p.id == id);
         if (idx !== -1) {
             list[idx].name = name;
@@ -316,7 +338,6 @@ document.getElementById('btnSaveProduct')?.addEventListener('click', () => {
             if (currentImageBase64) list[idx].image = currentImageBase64;
         }
     } else {
-        // Новый товар
         const newId = list.length ? Math.max(...list.map(p => p.id)) + 1 : 1;
 
         list.push({
@@ -337,7 +358,6 @@ document.getElementById('btnSaveProduct')?.addEventListener('click', () => {
     applyFilters();
 });
 
-// Очистка формы
 function resetProductForm() {
     document.getElementById('p_id').value = '';
     document.getElementById('p_name').value = '';
@@ -379,7 +399,6 @@ function renderProductsAdmin() {
 
 renderProductsAdmin();
 
-// Редактировать товар
 function editProduct(id) {
     const list = getProducts();
     const p = list.find(x => x.id == id);
@@ -397,7 +416,6 @@ function editProduct(id) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Удаление товара
 function deleteProduct(id) {
     if (!confirm('Удалить товар?')) return;
 
