@@ -121,16 +121,17 @@ function updateCartCount() {
 }
 updateCartCount();
 
-// ===================== ТОВАРЫ =====================
+// ===================== ТОВАРЫ (с версионированием) =====================
 
-// 🔥 ДЕФОЛТНЫЕ ТОВАРЫ + 3 новых добавлены
+const PRODUCTS_VERSION = 2; // 🚀 меняешь цифру — у всех обновляются товары автоматически
+
 const DEFAULT_PRODUCTS = [
     { id: 1, name: 'Семейные улыбки', category: 'family', size: 'm', price: 4990, image: 'assets/img/p1.jpg' },
     { id: 2, name: 'Горная ромашка', category: 'holiday', size: 's', price: 1990, image: 'assets/img/p2.jpg' },
     { id: 3, name: 'Геймер', category: 'funny', size: 'l', price: 2399, image: 'assets/img/p3.jpg' },
     { id: 4, name: 'Just be cool', category: 'funny', size: 'xl', price: 1399, image: 'assets/img/p4.jpg' },
 
-    // 🔥 ТРИ НОВЫХ ТОВАРА
+    // 🔥 Три новых товара
     {
         id: 101,
         name: "Футболка с принтом (tshort1)",
@@ -157,26 +158,30 @@ const DEFAULT_PRODUCTS = [
     }
 ];
 
-function getProducts() {
-    const raw = localStorage.getItem('ap_products');
+// Версионирование
+function loadProducts() {
+    const savedVersion = Number(localStorage.getItem("ap_products_version"));
+    const savedProducts = localStorage.getItem("ap_products");
 
-    if (!raw) {
-        localStorage.setItem('ap_products', JSON.stringify(DEFAULT_PRODUCTS));
+    if (!savedProducts || savedVersion !== PRODUCTS_VERSION) {
+        localStorage.setItem("ap_products", JSON.stringify(DEFAULT_PRODUCTS));
+        localStorage.setItem("ap_products_version", PRODUCTS_VERSION);
         return [...DEFAULT_PRODUCTS];
     }
 
     try {
-        const arr = JSON.parse(raw);
-        if (Array.isArray(arr)) return arr;
-    } catch (e) { }
-
-    localStorage.setItem('ap_products', JSON.stringify(DEFAULT_PRODUCTS));
-    return [...DEFAULT_PRODUCTS];
+        return JSON.parse(savedProducts);
+    } catch {
+        localStorage.setItem("ap_products", JSON.stringify(DEFAULT_PRODUCTS));
+        return [...DEFAULT_PRODUCTS];
+    }
 }
 
 function saveProducts(list) {
-    localStorage.setItem('ap_products', JSON.stringify(list));
+    localStorage.setItem("ap_products", JSON.stringify(list));
 }
+
+const getProducts = () => loadProducts();
 
 // ===================== Каталог =====================
 const productList = document.getElementById('productList');
@@ -297,7 +302,6 @@ function handleReferral() {
 handleReferral();
 
 // ===================== АДМИН - ТОВАРЫ =====================
-
 let currentImageBase64 = null;
 
 document.getElementById('p_image')?.addEventListener('change', e => {
